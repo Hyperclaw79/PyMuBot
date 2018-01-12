@@ -1,0 +1,82 @@
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: app
+      hasuraService: custom
+    name: app
+    namespace: '{{ cluster.metadata.namespaces.user }}'
+  spec:
+    replicas: 1
+    strategy: {}
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: app
+      spec:
+        containers:
+        - image: hasura/hello-world:latest
+          env:
+          - name: PRODUCTION
+            value: "true"
+          - name: CLUSTER_NAME 
+            value: {{ cluster.name }}
+          - name: MUSIX_MATCH_TOKEN
+            valueFrom:
+               secretKeyRef:
+                  name: hasura-secrets
+                  key: bot.musix_match_token.key  
+          - name: CONSUMER_TOKEN
+            valueFrom:
+               secretKeyRef:
+                  name: hasura-secrets
+                  key: bot.consumer_token.key
+          - name: CONSUMER_SECRET
+            valueFrom:
+               secretKeyRef:
+                  name: hasura-secrets
+                  key: bot.consumer_secret.key        
+          - name: ACCES_TOKEN
+            valueFrom:
+               secretKeyRef:
+                  name: hasura-secrets
+                  key: bot.access_token.key
+          - name: ACCESS_SECRET
+            valueFrom:
+               secretKeyRef:
+                  name: hasura-secrets
+                  key: bot.access_secret.key
+          imagePullPolicy: IfNotPresent
+          name: app
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+        securityContext: {}
+        terminationGracePeriodSeconds: 0
+  status: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: app
+      hasuraService: custom
+    name: app
+    namespace: '{{ cluster.metadata.namespaces.user }}'
+  spec:
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: app
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata: {}

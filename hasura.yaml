@@ -1,0 +1,5 @@
+description: "A twitter bot that fetches details for a song extracted from a user's request using NLP. Try talking to it on Twitter by mentioning it and asking for a song."
+keywords: python, python3, pymubot, pub2hub, twitter, boilerplate
+media: {}
+name: PyMuBot
+platformVersion: v0.15.21
