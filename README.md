@@ -3,7 +3,7 @@
 **PyMuBot** is a simple twitter messenger bot whom you can ask about the details for a song using simple human language. All you have to do is, mention `@PyMuBot` in your status and it will respond to you soon. It is made by [Harshith Thota](https://github.com/Hyperclaw79) using [Python 3.5](https://www.python.org/downloads/release/python-364/). It is live thanks to hosting by [Hasura](https://hasura.io).
 
 ## See it in action:
-![PyMuBot in Action](readme_assets/PyMuBot_demo.gif)
+![PyMuBot in Action](readme_assets/PyMuBot.gif)
 
 ## Code Sneak-Peak:
 ![Code Preview](readme_assets/code_preview.png)
